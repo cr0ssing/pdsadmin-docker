@@ -14,7 +14,26 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    # Required permissions
+    permissions:
+      pull-requests: read
+    # Set job output to values from filter step
+    outputs:
+      Dockerfile: ${{ steps.filter.outputs.backend }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          Dockerfile:
+            - 'Dockerfile'
+
   pdsadmin-container-ghcr:
+    needs: changes
+    if: ${{ needs.changes.outputs.Dockerfile == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
