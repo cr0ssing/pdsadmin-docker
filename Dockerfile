@@ -9,7 +9,6 @@ RUN apt-get update && apt-get upgrade --yes \
   && mkdir /pdsadmin && wget https://raw.githubusercontent.com/bluesky-social/pds/main/pdsadmin.sh -P /pdsadmin \
   && chmod +x /pdsadmin/pdsadmin.sh
 
-VOLUME /pds pds
 WORKDIR /pdsadmin
 
 CMD rm -f /pds/pds.env; env | grep '^PDS_' > /pds/pds.env; tail -f /dev/null
