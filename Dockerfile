@@ -12,4 +12,4 @@ RUN apt-get update && apt-get upgrade --yes \
 VOLUME /pds pds
 WORKDIR /pdsadmin
 
-CMD env | grep '^PDS_' > /pds/pds.env; tail -f /dev/null
+CMD rm -f /pds/pds.env; env | grep '^PDS_' > /pds/pds.env; tail -f /dev/null
