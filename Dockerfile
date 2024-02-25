@@ -5,8 +5,8 @@ LABEL org.opencontainers.image.description="PDSAdmin"
 LABEL org.opencontainers.image.licenses=GPL
 
 RUN apt-get update && apt-get upgrade --yes \
-  && apt-get install --yes --no-install-recommends ca-certificates curl gnupg jq lsb-release openssl sqlite3 xxd wget \
-  && mkdir /pdsadmin && wget https://raw.githubusercontent.com/bluesky-social/pds/main/pdsadmin.sh -P /pdsadmin \
+  && apt-get install --yes --no-install-recommends ca-certificates curl jq openssl \
+  && mkdir /pdsadmin && curl -O --output-dir /pdsadmin https://raw.githubusercontent.com/bluesky-social/pds/main/pdsadmin.sh \
   && chmod +x /pdsadmin/pdsadmin.sh && mkdir /pds
 
 WORKDIR /pdsadmin
