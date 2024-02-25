@@ -16,14 +16,11 @@ env:
 jobs:
   changes:
     runs-on: ubuntu-latest
-    # Required permissions
-    permissions:
-      pull-requests: read
     # Set job output to values from filter step
     outputs:
-      Dockerfile: ${{ steps.filter.outputs.backend }}
+      Dockerfile: ${{ steps.filter.outputs.Dockerfile }}
     steps:
-    # For pull requests it's not necessary to checkout the code
+    - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
       id: filter
       with:
