@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 
 # Copyright (C) 2024 Robin Lamberti.
 
@@ -17,4 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with pdsadmin-docker. If not, see <http://www.gnu.org/licenses/>.
 
-docker exec -it pdsadmin ./pdsadmin.sh $@
+for i in $(find ./ -name '*.yaml') # or whatever other pattern...
+do
+  if ! grep -q Copyright $i
+  then
+    cat copyright_header.txt $i >$i.new && mv $i.new $i
+  fi
+done
