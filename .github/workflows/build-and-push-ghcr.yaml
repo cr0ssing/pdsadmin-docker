@@ -46,7 +46,7 @@ jobs:
 
   pdsadmin-container-ghcr:
     needs: changes
-    if: ${{ needs.changes.outputs.Dockerfile == 'true' }}
+    if: ${{ needs.changes.outputs.Dockerfile == 'true' || startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
